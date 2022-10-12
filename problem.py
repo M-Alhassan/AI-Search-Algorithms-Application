@@ -78,13 +78,13 @@ class GridProblem(Problem):
         wall_coords = self.wall_coords
         # Remove illegal moves from list
         for wall in wall_coords:
-            if ((x_coord+1 == wall[0] and y_coord == wall[1]) or x_coord == self.M) and 'right' in moves:
+            if ((x_coord+1 == wall[0] and y_coord == wall[1]) or x_coord >= self.M) and 'right' in moves:
                 moves.remove('right')
-            if ((x_coord-1 == wall[0] and y_coord == wall[1]) or x_coord == 1) and 'left' in moves:
+            if ((x_coord-1 == wall[0] and y_coord == wall[1]) or x_coord <= 1) and 'left' in moves:
                 moves.remove('left')
-            if ((y_coord+1 == wall[1] and x_coord == wall[0]) or y_coord == self.N)  and 'up' in moves:
+            if ((y_coord+1 == wall[1] and x_coord == wall[0]) or y_coord >= self.N)  and 'up' in moves:
                 moves.remove('up')
-            if ((y_coord-1 == wall[1] and x_coord == wall[0]) or y_coord == 1)   and 'down' in moves:
+            if ((y_coord-1 == wall[1] and x_coord == wall[0]) or y_coord <= 1)   and 'down' in moves:
                 moves.remove('down')
         if len(moves) == 0:
             return []
