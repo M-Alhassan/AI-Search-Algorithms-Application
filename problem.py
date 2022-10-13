@@ -52,7 +52,7 @@ class RouteProblem(Problem):
             return 0
         else:
             goal_x = self.map_coords[self.goal_state][0]
-            goal_y = self.map_coords[self.goal_state][0]
+            goal_y = self.map_coords[self.goal_state][1]
             current_x = self.map_coords[node.state][0]
             current_y = self.map_coords[node.state][1]
             euclidean_dist = ((goal_x - current_x)**2 + (goal_y - current_y)**2)**0.5
