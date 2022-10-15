@@ -76,20 +76,30 @@ class GridProblem(Problem):
         y_coord = state[0][1]
         moves = ['up', 'down', 'right', 'left'] # all available moves
         wall_coords = self.wall_coords
+
         # Remove illegal moves from list
-        for wall in wall_coords:
-            if ((x_coord+1 == wall[0] and y_coord == wall[1]) or x_coord >= self.M) and 'right' in moves:
+        if(len(wall_coords) != 0):
+            # if walls exist
+            for wall in wall_coords:
+                if ((x_coord+1 == wall[0] and y_coord == wall[1]) or x_coord >= self.M) and 'right' in moves:
+                    moves.remove('right')
+                if ((x_coord-1 == wall[0] and y_coord == wall[1]) or x_coord <= 1) and 'left' in moves:
+                    moves.remove('left')
+                if ((y_coord+1 == wall[1] and x_coord == wall[0]) or y_coord >= self.N)  and 'up' in moves:
+                    moves.remove('up')
+                if ((y_coord-1 == wall[1] and x_coord == wall[0]) or y_coord <= 1)   and 'down' in moves:
+                    moves.remove('down')
+        else:
+            # if walls do not exist
+            if ( x_coord >= self.M) and 'right' in moves:
                 moves.remove('right')
-            if ((x_coord-1 == wall[0] and y_coord == wall[1]) or x_coord <= 1) and 'left' in moves:
+            if ( x_coord <= 1) and 'left' in moves:
                 moves.remove('left')
-            if ((y_coord+1 == wall[1] and x_coord == wall[0]) or y_coord >= self.N)  and 'up' in moves:
+            if ( y_coord >= self.N)  and 'up' in moves:
                 moves.remove('up')
-            if ((y_coord-1 == wall[1] and x_coord == wall[0]) or y_coord <= 1)   and 'down' in moves:
+            if ( y_coord <= 1)   and 'down' in moves:
                 moves.remove('down')
-        if len(moves) == 0:
-            return []
-        else:    
-            return moves
+        return moves
 
     def result(self, state, action):
         x_coord = state[0][0]
